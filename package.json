@@ -1,5 +1,5 @@
 {
-  "name": "airrobe_widget",
+  "name": "int_airrobe_core",
   "version": "0.0.1",
   "description": "New overlay cartridge",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "lint": "sgmf-scripts --lint js && sgmf-scripts --lint css",
     "lint:fix": "sgmf-scripts --lint js --fix && sgmf-scripts --lint css --fix",
     "upload": "sgmf-scripts --upload -- ",
-    "uploadCartridge": "sgmf-scripts --uploadCartridge airrobe_widget",
+    "uploadCartridge": "sgmf-scripts --uploadCartridge int_airrobe_core",
     "compile:js": "sgmf-scripts --compile js",
     "compile:scss": "sgmf-scripts --compile css"
   },
@@ -32,5 +32,8 @@
   "browserslist": [
     "last 2 versions",
     "ie >= 10"
-  ]
+  ],
+  "paths": {
+    "base": "../storefront-reference-architecture-master/cartridges/app_storefront_base/"
+  }
 }

@@ -1,0 +1,53 @@
+
+<isset name="priceCents" value="${price.decimalPrice.replace('.', '')}" scope="page" />
+<airrobe-opt-in
+      currency="${price.currency}"
+      price-cents="${priceCents}"
+      rrp-cents="${priceCents}"
+      category="${product.category}"
+      brand="testing"></airrobe-opt-in>
+<iscomment> <isloop items="${category}" var="categoryName" status="loopState">
+    ${JSON.stringify(categoryName)}
+</isloop> </iscomment>
+${JSON.stringify(product)}
+Inside isobject
+
+
+
+<iscomment> 
+${product.id}
+${JSON.stringify(product)}
+${product.price.sales.decimalPrice}
+${TestUtils.priceCents(product.id)}
+Price
+${JSON.stringify(price.decimalPrice.replace('.', ''))} 
+"${price.decimalPrice.replaceAll(".", "")}"
+${Number.parseInt(Number(price))}
+CATEGORY
+${JSON.stringify(resources)}
+Product
+${JSON.stringify(pdict.product)}
+ADD TO CART
+${JSON.stringify(pdict.addToCartUrl)}
+RESOURCES
+${JSON.stringify(pdict.resources)}
+BREADCRUMBS
+${JSON.stringify(pdict.breadcrumbs)}
+canonicalUrl
+${JSON.stringify(pdict.canonicalUrl)}
+SCHEMA DATA
+${JSON.stringify(pdict.schemaData)}
+<isloop items="${breadcrumbs}" var="breadcrumbValue" status="loopState">
+                <li class="breadcrumb-item">
+                    <isif condition="${loopState.last}">
+                        <a href="${breadcrumbValue.url}" aria-current="page">
+                            ${JSON.stringify(breadcrumbValue)}
+                        </a>
+                    <iselse>
+                        <a href="${breadcrumbValue.url}">
+                            ${JSON.stringify(breadcrumbValue)}
+                        </a>
+                    </isif>
+                </li>
+            </isloop> 
+</iscomment>
