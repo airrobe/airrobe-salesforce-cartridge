@@ -55,7 +55,7 @@ describe('Helpers - Product', function () {
     primaryCategoryMock: categoryMock,
   }
 
-  describe.only('getAirrobePdpProps() function', function () {
+  describe.only('getAirrobeSingleOptInProps() function', function () {
     beforeEach(function () {
       stubProductFactoryGet.reset()
       stubGetProduct.reset()
@@ -69,7 +69,7 @@ describe('Helpers - Product', function () {
       stubProductFactoryGet.returns(prodMock)
       stubGetProduct.returns(apiProductMock)
 
-      var result = airrobeOptInHelpers.getAirrobePdpProps(params)
+      var result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
       expect(result).to.be.empty
     })
 
@@ -91,7 +91,7 @@ describe('Helpers - Product', function () {
       stubCategoryMock.returns(categoryMock)
 
       const params = { pid: '12345' }
-      var result = airrobeOptInHelpers.getAirrobePdpProps(params)
+      var result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
 
       const priceCents = prodMock.price.sales.value * 100
       const airrobePdpProps = {
