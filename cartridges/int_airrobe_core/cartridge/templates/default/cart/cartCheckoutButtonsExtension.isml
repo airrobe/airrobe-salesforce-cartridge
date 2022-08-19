@@ -1,0 +1,4 @@
+<airrobe-multi-opt-in
+  app-id="515b6ee129da"
+  items="${JSON.stringify(pdict.categories.categories)}"
+></airrobe-multi-opt-in> 
