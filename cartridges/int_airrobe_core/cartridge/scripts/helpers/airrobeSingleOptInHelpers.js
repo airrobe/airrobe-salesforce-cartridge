@@ -3,7 +3,8 @@ var Logger = LogUtils.getLogger('airrobeSingleOptIn')
 
 /**
  * Get the props for the airrobe Single Opt-in PDP widget
- * @param {string} params - the request params used to build a prodct
+ * @param {string} params - the request params used to build a product
+ * @returns {object} - airrobeSingleOptInProps
  */
 function getAirrobeSingleOptInProps(params) {
   const ProductFactory = require('*/cartridge/scripts/factories/product')
@@ -15,13 +16,12 @@ function getAirrobeSingleOptInProps(params) {
     )
     return {}
   }
+  const getCategory = require('*/cartridge/scripts/util/getCategory')
   const category = getCategory(null, product.id, [])
 
   const priceCents = product.price.sales.value * 100
   const currency = product.price.sales.currency
   const brand = product.brand
-
-  Logger.info('priceCents {0}', priceCents)
 
   return {
     rrpCents: priceCents,
@@ -32,37 +32,6 @@ function getAirrobeSingleOptInProps(params) {
   }
 }
 
-/**
- * Get category for product
- * @param {string} cgid - category ID from navigation and search
- * @param {string} pid - the product id
- * @param {Array} categoryParts - array of the parts of the product's category
- * @returns {string} a category string
- */
-function getCategory(cgid, pid, categoryParts) {
-  const CatalogMgr = require('dw/catalog/CatalogMgr')
-  const ProductMgr = require('dw/catalog/ProductMgr')
-  const product = ProductMgr.getProduct(pid)
-
-  let category
-  if (product) {
-    category = product.variant ? product.masterProduct.primaryCategory : product.primaryCategory
-  } else if (cgid) {
-    category = CatalogMgr.getCategory(cgid)
-  }
-
-  if (category) {
-    categoryParts.push(category.displayName)
-
-    if (category.parent && category.parent.ID !== 'root') {
-      return getCategory(category.parent.ID, null, categoryParts)
-    }
-  }
-
-  return categoryParts.join('/')
-}
-
 module.exports = {
   getAirrobeSingleOptInProps: getAirrobeSingleOptInProps,
-  getCategory: getCategory,
 }

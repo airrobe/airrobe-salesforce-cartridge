@@ -1,8 +1,9 @@
-<isset name="airrobeProps" value="${product.airrobeProps}" scope="page" />
-<iscomment> TODO - priceCents is being passed in as string with decimal </iscomment>
+<isset name="airrobeSingleOptInProps" value="${product.airrobeSingleOptInProps}" scope="page" />
+<iscomment> TODO - priceCents is being passed in as string with decimal and  </iscomment>
+<iscomment> Readd the add to cart page so we can control where the widget is being placed </iscomment>
 <airrobe-opt-in
-    currency="${airrobeProps.currency}"
-    price-cents="${airrobeProps.priceCents}"
-    rrp-cents="${airrobeProps.priceCents}"
-    category="${airrobeProps.category}"
-    brand="${airrobeProps.brand}"></airrobe-opt-in>
+    currency="${airrobeSingleOptInProps.currency}"
+    price-cents="${airrobeSingleOptInProps.priceCents}"
+    rrp-cents="${airrobeSingleOptInProps.priceCents}"
+    category="${airrobeSingleOptInProps.category}"
+    brand="${airrobeSingleOptInProps.brand}"></airrobe-opt-in>

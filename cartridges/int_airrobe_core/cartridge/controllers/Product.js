@@ -11,24 +11,23 @@ const Product = module.superModule
 server.extend(Product)
 
 /**
- *
- * Retrieves props required for airrobe widget
+ * Retrieves props required for the AirRobe Single Opt-in widget
  * Appended to Product-Show controller on which the Single Opt-in widget is shown
  */
-const getProductCategoryForAirrobeWidget = function (req, res, next) {
+const getAirRobeSingleOptInProps = function (req, res, next) {
   const viewData = res.getViewData()
 
   const params = req.querystring
-  const airrobeProps =
+  const airrobeSingleOptInProps =
     require('*/cartridge/scripts/helpers/airrobeSingleOptInHelpers').getAirrobeSingleOptInProps(
       params
     )
-  viewData.product.airrobeProps = airrobeProps
+  viewData.product.airrobeSingleOptInProps = airrobeSingleOptInProps
 
   res.setViewData(viewData)
   next()
 }
 
-server.append('Show', getProductCategoryForAirrobeWidget)
+server.append('Show', getAirRobeSingleOptInProps)
 
 module.exports = server.exports()
