@@ -43,7 +43,7 @@ describe('getCategory() function', function () {
   }
 
   const apiProductMock = {
-    constiant: true,
+    variant: true,
     masterProduct: {
       primaryCategory: categoryMock,
     },

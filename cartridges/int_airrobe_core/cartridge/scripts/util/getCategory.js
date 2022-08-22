@@ -25,7 +25,7 @@ function getCategory(cgid, pid, categoryParts) {
     }
   }
 
-  return categoryParts.join('/')
+  return categoryParts.reverse().join('/')
 }
 
 module.exports = getCategory

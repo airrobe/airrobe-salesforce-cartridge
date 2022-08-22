@@ -1,15 +1,16 @@
 'use strict'
 
-var proxyquire = require('proxyquire').noCallThru().noPreserveCache()
+const proxyquire = require('proxyquire').noCallThru().noPreserveCache()
 const { expect } = require('chai')
-var sinon = require('sinon')
+const sinon = require('sinon')
 
-var stubGetProduct = sinon.stub()
-var stubCategoryMock = sinon.stub()
-var stubProductFactoryGet = sinon.stub()
+const stubGetProduct = sinon.stub()
+const stubCategoryMock = sinon.stub()
+const stubProductFactoryGet = sinon.stub()
+const stubGetLogger = sinon.stub()
 
 describe('Helpers - Product', function () {
-  var airrobeOptInHelpers = proxyquire(
+  const airrobeOptInHelpers = proxyquire(
     '../../../../../cartridges/int_airrobe_core/cartridge/scripts/helpers/airrobeSingleOptInHelpers',
     {
       '*/cartridge/scripts/factories/product': {
@@ -21,15 +22,18 @@ describe('Helpers - Product', function () {
       'dw/catalog/ProductMgr': {
         getProduct: stubGetProduct,
       },
+      '*/cartridge/scripts/util/airrobeLogUtils': {
+        getLogger: stubGetLogger,
+      },
     }
   )
 
-  var productMock = {}
+  const productMock = {}
   beforeEach(function () {
-    productMock.variationModel = {
+    productMock.constiationModel = {
       master: false,
       selectedVariant: false,
-      productVariationAttributes: [
+      productVariantAttributes: [
         {
           ID: 'color',
           displayName: 'Color',
@@ -38,7 +42,7 @@ describe('Helpers - Product', function () {
     }
   })
 
-  var categoryMock = {
+  const categoryMock = {
     displayName: 'test category',
     ID: 'gid',
     parent: {
@@ -46,7 +50,7 @@ describe('Helpers - Product', function () {
     },
   }
 
-  var apiProductMock = {
+  const apiProductMock = {
     variant: true,
     masterProduct: {
       primaryCategory: categoryMock,
@@ -68,12 +72,12 @@ describe('Helpers - Product', function () {
       stubProductFactoryGet.returns(prodMock)
       stubGetProduct.returns(apiProductMock)
 
-      var result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
+      const result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
       expect(result).to.be.empty
     })
 
     it('should return the airrobe widget props', function () {
-      var prodMock = {
+      const prodMock = {
         productType: 'variant',
         id: '12345',
         brand: 'test brand',
@@ -90,7 +94,7 @@ describe('Helpers - Product', function () {
       stubCategoryMock.returns(categoryMock)
 
       const params = { pid: '12345' }
-      var result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
+      const result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
 
       const priceCents = prodMock.price.sales.value * 100
       const airrobePdpProps = {

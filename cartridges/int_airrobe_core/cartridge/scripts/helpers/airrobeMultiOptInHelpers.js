@@ -11,6 +11,7 @@ function getAirrobeMultiOptInProps() {
   const categories = collections.map(currentBasket.getAllProductLineItems(), function (lineItem) {
     let productId = lineItem.getProduct().getID()
     let category = getCategory(null, productId, [])
+
     return { category }
   })
 
