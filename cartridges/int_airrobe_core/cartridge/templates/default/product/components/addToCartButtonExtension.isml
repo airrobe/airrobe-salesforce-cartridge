@@ -1,8 +1,10 @@
-<isset name="airrobeProps" value="${product.airrobeProps}" scope="page" />
-<iscomment> TODO - priceCents is being passed in as string with decimal </iscomment>
-<airrobe-opt-in
-    currency="${airrobeProps.currency}"
-    price-cents="${airrobeProps.priceCents}"
-    rrp-cents="${airrobeProps.priceCents}"
-    category="${airrobeProps.category}"
-    brand="${airrobeProps.brand}"></airrobe-opt-in>
+<iscomment> This is used by single opt in widget to get the props it needs to render</iscomment>
+<script>
+  window.AirRobeSingleSFData = {
+    currencyCode: "${product.airrobeSingleOptInProps.currency}",
+    priceCents: "${product.airrobeSingleOptInProps.priceCents}".replace('.0',''),
+    rrpCents: "${product.airrobeSingleOptInProps.priceCents}".replace('.0',''),
+    category: "${product.airrobeSingleOptInProps.category}",
+    brand: "${product.airrobeSingleOptInProps.brand}"
+  };
+</script>
