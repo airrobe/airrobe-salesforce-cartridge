@@ -5,7 +5,7 @@ const { expect } = require('chai')
 const sinon = require('sinon')
 
 const stubGetProduct = sinon.stub()
-const stubCategoryMock = sinon.stub()
+const stubGetCategory = sinon.stub()
 const stubProductFactoryGet = sinon.stub()
 const stubGetLogger = sinon.stub()
 
@@ -16,15 +16,13 @@ describe('Helpers - Product', function () {
       '*/cartridge/scripts/factories/product': {
         get: stubProductFactoryGet,
       },
-      'dw/catalog/CatalogMgr': {
-        getCategory: stubCategoryMock,
-      },
       'dw/catalog/ProductMgr': {
         getProduct: stubGetProduct,
       },
       '*/cartridge/scripts/util/airrobeLogUtils': {
         getLogger: stubGetLogger,
       },
+      '*/cartridge/scripts/util/getCategory': stubGetCategory,
     }
   )
 
@@ -42,27 +40,15 @@ describe('Helpers - Product', function () {
     }
   })
 
-  const categoryMock = {
-    displayName: 'test category',
-    ID: 'gid',
-    parent: {
-      ID: 'root',
-    },
-  }
-
-  const apiProductMock = {
-    variant: true,
-    masterProduct: {
-      primaryCategory: categoryMock,
-    },
-    primaryCategoryMock: categoryMock,
+  const errorLoggerMock = {
+    error: () => {},
   }
 
   describe.only('getAirrobeSingleOptInProps() function', function () {
     beforeEach(function () {
       stubProductFactoryGet.reset()
       stubGetProduct.reset()
-      stubCategoryMock.reset()
+      stubGetLogger.reset()
     })
 
     it('should return no airrobe widget props', function () {
@@ -70,7 +56,7 @@ describe('Helpers - Product', function () {
       const prodMock = {}
 
       stubProductFactoryGet.returns(prodMock)
-      stubGetProduct.returns(apiProductMock)
+      stubGetLogger.returns(errorLoggerMock)
 
       const result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
       expect(result).to.be.empty
@@ -88,10 +74,10 @@ describe('Helpers - Product', function () {
           },
         },
       }
+      const testCategory = 'test/category/1'
 
       stubProductFactoryGet.returns(prodMock)
-      stubGetProduct.returns(apiProductMock)
-      stubCategoryMock.returns(categoryMock)
+      stubGetCategory.onCall(0).returns(testCategory)
 
       const params = { pid: '12345' }
       const result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
@@ -101,7 +87,7 @@ describe('Helpers - Product', function () {
         rrpCents: priceCents,
         priceCents,
         currency: prodMock.price.sales.currency,
-        category: apiProductMock.masterProduct.primaryCategory.displayName,
+        category: testCategory,
         brand: prodMock.brand,
       }
       expect(result).to.deep.include(airrobePdpProps)

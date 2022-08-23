@@ -1,10 +1,8 @@
 'use strict'
 
-const assert = require('chai').assert
 const proxyquire = require('proxyquire').noCallThru().noPreserveCache()
 const { expect } = require('chai')
 const sinon = require('sinon')
-const ArrayList = require('../../../../mocks/dw.util.Collection.js')
 
 const stubGetCategory = sinon.stub()
 const stubBasketMgrCurrentBasket = sinon.stub()
@@ -51,16 +49,7 @@ describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
     }
   })
 
-  const categoryMock = {
-    'test-id-1': 'test/category/1',
-    'test-id-2': 'test/category/2',
-  }
-
   describe.only('getAirrobeMultiOptInProps() function', function () {
-    // beforeEach(() => {
-    //   stubGetCategory.reset()
-    // })
-
     it('should return the airrobe widget props', function () {
       stubBasketMgrCurrentBasket.returns(currentBasket)
       stubGetCategory.onCall(0).returns('test/category/1')
