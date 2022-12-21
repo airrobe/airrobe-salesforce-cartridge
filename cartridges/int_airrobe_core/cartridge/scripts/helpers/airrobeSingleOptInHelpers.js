@@ -23,12 +23,17 @@ function getAirrobeSingleOptInProps(params) {
   const currency = product.price.sales.currency
   const brand = product.brand
 
+  // const ProductMgr = require('dw/catalog/ProductMgr')
+  // const test = ProductMgr.getProduct(params.pid)
+
   return {
     rrpCents: priceCents,
     priceCents,
     currency,
     category,
     brand,
+    // test: test.getPriceModel().price.available,
+    // test1: test.getPriceModel().getPriceInfos(),
   }
 }
 

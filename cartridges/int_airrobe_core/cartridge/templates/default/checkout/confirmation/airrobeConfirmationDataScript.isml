@@ -1,0 +1,14 @@
+<iscomment> This is used by the AirRobe Confirmation widget to get the props it needs to render</iscomment>
+<script>
+if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
+  window.AirRobeSalesforceData = {
+    ...window.AirRobeSalesforceData,
+    confirmation: {
+      // TODO - get app-id from env
+      "app-id": "test",
+      email: "${pdict.confirmationProps.email}"
+      "order-id": "${pdict.confirmationProps.orderId}"
+    }
+  }
+</script>
+<airrobe-confirmation app-id="testing" email="newerTest@test.com" order-id="bbe0c504133f1fa15f8dd7467cf88b7f"></airrobe-confirmation>

@@ -7,6 +7,9 @@ function getAirrobeMultiOptInProps() {
   const getCategory = require('*/cartridge/scripts/util/getCategory')
   const BasketMgr = require('dw/order/BasketMgr')
   const currentBasket = BasketMgr.getCurrentBasket()
+  if (currentBasket == null) {
+    return {}
+  }
 
   const categories = collections.map(currentBasket.getAllProductLineItems(), function (lineItem) {
     let productId = lineItem.getProduct().getID()

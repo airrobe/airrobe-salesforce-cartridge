@@ -9,7 +9,7 @@ const stubGetCategory = sinon.stub()
 const stubProductFactoryGet = sinon.stub()
 const stubGetLogger = sinon.stub()
 
-describe('Helpers - Product', function () {
+describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
   const airrobeOptInHelpers = proxyquire(
     '../../../../../cartridges/int_airrobe_core/cartridge/scripts/helpers/airrobeSingleOptInHelpers',
     {

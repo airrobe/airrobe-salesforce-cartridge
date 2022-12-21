@@ -1,0 +1,15 @@
+<iscomment> This is used by the AirRobe Single Opt-in widget to get the props it needs to render</iscomment>
+<script>
+  if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
+  window.AirRobeSalesforceData = {
+    ...window.AirRobeSalesforceData,
+    single: {
+      currency: "${product.airrobeSingleOptInProps.currency}",
+      "price-cents": "${product.airrobeSingleOptInProps.priceCents}".replace('.0',''),
+      // TODO - Check whether we can get rrp - this could be list price only if sales price there's also a sales price otherwise this is just sales price?
+      "rrp-cents": "${product.airrobeSingleOptInProps.priceCents}".replace('.0',''),
+      category: "${product.airrobeSingleOptInProps.category}",
+      brand: "${product.airrobeSingleOptInProps.brand}"
+    }
+  };
+</script>
