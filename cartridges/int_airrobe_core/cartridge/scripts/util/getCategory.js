@@ -18,14 +18,14 @@ function getCategory(cgid, pid, categoryParts) {
   }
 
   if (category) {
-    categoryParts.push(category.displayName)
+    categoryParts.unshift(category.displayName)
 
     if (category.parent && category.parent.ID !== 'root') {
       return getCategory(category.parent.ID, null, categoryParts)
     }
   }
 
-  return categoryParts.reverse().join('/')
+  return categoryParts.join('/')
 }
 
 module.exports = getCategory
