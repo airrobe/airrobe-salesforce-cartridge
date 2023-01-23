@@ -10,4 +10,4 @@ if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
     }
   }
 </script>
-<airrobe-confirmation app-id="${process.env.AIRROBE_APP_ID}" email="newerTest@test.com" order-id="bbe0c504133f1fa15f8dd7467cf88b7f"></airrobe-confirmation>
+<airrobe-confirmation app-id="${process.env.AIRROBE_APP_ID}" email="${pdict.confirmationProps.orderId}" order-id="${pdict.confirmationProps.email}"></airrobe-confirmation>
