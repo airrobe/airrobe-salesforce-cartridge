@@ -1,5 +1,3 @@
 <isinclude template="product/components/airrobeSingleOptInDataScript"/>
 <isset name="currency" value="${window.AirRobeSalesforceData.single.currency}" scope="page" />
 <airrobe-opt-in currency="${currency}" price-cents="testhi" rrp-cents="another" category='what' brand="hey"></airrobe-opt-in>
-${JSON.stringify(AirRobeSalesforceData)}
-"${window.AirRobeSalesforceData}"

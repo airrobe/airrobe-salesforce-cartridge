@@ -4,10 +4,10 @@ if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
   window.AirRobeSalesforceData = {
     ...window.AirRobeSalesforceData,
     confirmation: {
-      "app-id": process.env.AIRROBE_APP_ID,
+      "app-id": dw.system.Site.getCurrent().getCustomPreferenceValue('airRobeAppId'),
       email: "${pdict.confirmationProps.email}"
       "order-id": "${pdict.confirmationProps.orderId}"
     }
   }
 </script>
-<airrobe-confirmation app-id="${process.env.AIRROBE_APP_ID}" email="${pdict.confirmationProps.orderId}" order-id="${pdict.confirmationProps.email}"></airrobe-confirmation>
+<airrobe-confirmation app-id="${dw.system.Site.getCurrent().getCustomPreferenceValue('airRobeAppId')}" email="${pdict.confirmationProps.orderId}" order-id="${pdict.confirmationProps.email}"></airrobe-confirmation>

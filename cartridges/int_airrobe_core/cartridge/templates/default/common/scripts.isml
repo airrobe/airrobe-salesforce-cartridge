@@ -6,4 +6,4 @@
     >
     </script>
 </isloop>
-<script async src="${process.env.AIRROBE_SCRIPT_SRC}"></script>
+<script async type='text/javascript' src="${dw.system.Site.getCurrent().getCustomPreferenceValue('airRobeScriptSrc')}"></script>
