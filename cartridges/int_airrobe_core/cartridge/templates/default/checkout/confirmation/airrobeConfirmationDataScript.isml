@@ -10,4 +10,12 @@ if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
     }
   }
 </script>
-<airrobe-confirmation app-id="${dw.system.Site.getCurrent().getCustomPreferenceValue('airRobeAppId')}" email="${pdict.confirmationProps.orderId}" order-id="${pdict.confirmationProps.email}"></airrobe-confirmation>
+<script>
+  window.addEventListener('load', function() {
+    var widget = document.querySelector('airrobe-confirmation');
+    widget.setAttribute('app-id', window.AirRobeSalesforceData.confirmation['app-id']);
+    widget.setAttribute('email', window.AirRobeSalesforceData.confirmation.email);
+    widget.setAttribute('order-id', window.AirRobeSalesforceData.confirmation['order-id']);
+  });
+</script>
+<airrobe-confirmation app-id="${window.AirRobeSalesforceData.confirmation['app-id']}" email="${window.AirRobeSalesforceData.confirmation.email}" order-id="${window.AirRobeSalesforceData.confirmation['order-id']}"></airrobe-confirmation>

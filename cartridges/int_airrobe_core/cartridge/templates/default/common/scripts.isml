@@ -1,9 +1,9 @@
 <script>//common/scripts.isml</script>
-<script defer src="${URLUtils.staticURL('/js/main.js')}"></script>
+<script defer="defer" src="${URLUtils.staticURL('/js/main.js')}"></script>
 <isloop items="${ require('*/cartridge/scripts/assets.js').scripts }" var="script">
-    <script defer src="${script.src}"
+    <script defer="defer" src="${script.src}"
     <isif condition="${script.integrity != null}">integrity="${script.integrity}" crossorigin="anonymous"></isif>
     >
     </script>
 </isloop>
-<script async src="${dw.system.Site.getCurrent().getCustomPreferenceValue('airRobeScriptSrc')}"></script>
+<script async="async" src="${dw.system.Site.getCurrent().getCustomPreferenceValue('airRobeScriptSrc')}"></script>

@@ -1,3 +1,11 @@
 <isinclude template="product/components/airrobeSingleOptInDataScript"/>
-<isset name="currency" value="${window.AirRobeSalesforceData.single.currency}" scope="page" />
-<airrobe-opt-in currency="${currency}" price-cents="testhi" rrp-cents="another" category='what' brand="hey"></airrobe-opt-in>
+<script>
+  document.addEventListener('load', function() {
+    var widget = document.querySelector('airrobe-opt-in');
+    widget.setAttribute('currency', window.AirRobeSalesforceData.single.currency);
+    widget.setAttribute('price-cents', window.AirRobeSalesforceData.single['price-cents']);
+    widget.setAttribute('rrp-cents', window.AirRobeSalesforceData.single['rrp-cents']);
+    widget.setAttribute('category', window.AirRobeSalesforceData.single.category);
+    widget.setAttribute('brand', window.AirRobeSalesforceData.single.brand);
+  });
+</script>
