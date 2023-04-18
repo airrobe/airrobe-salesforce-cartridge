@@ -1,12 +1,13 @@
 <iscomment> This is used by multi opt in widget to get the props it needs to render</iscomment>
 <iscomment> TODO - update appId to get it from env vars </iscomment>
 <script>
-  console.log(JSON.stringify(${pdict.categories}))
+  const categories = "${JSON.stringify(pdict.resources.categories)}".replace(/&quot;/g, '"')
+
   if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {}
   window.AirRobeSalesforceData = {
     ...window.AirRobeSalesforceData,
     multi: {
-      items: []
+      items: categories
     }
   }
 </script>

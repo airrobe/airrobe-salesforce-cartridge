@@ -19,9 +19,7 @@ const getAirRobeMultiOptInProps = function (req, res, next) {
   const categories =
     require('*/cartridge/scripts/helpers/airrobeMultiOptInHelpers').getAirrobeMultiOptInProps()
 
-  viewData.categories = categories || []
-
-  Logger.error(JSON.stringify(viewData))
+  viewData.resources.categories = categories || []
   
   res.setViewData(viewData)
   next()
