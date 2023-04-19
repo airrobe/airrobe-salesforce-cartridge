@@ -5,6 +5,8 @@
         assets.addJs('/js/checkoutRegistration.js');
     </isscript>
 
+    <isinclude template="checkout/confirmation/airrobeConfirmationDataScript"/>
+
     <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
         <isinclude template="reporting/reportingUrls" />
     </isif>
@@ -25,7 +27,6 @@
             <isif condition="${pdict.returningCustomer === false && pdict.order.orderEmail}">
                 <div class="col-sm-6 offset-sm-3 offset-md-0 push-md-6">
                     <isinclude template="checkout/confirmation/confirmationCreateAccount" />
-                    <isinclude template="checkout/confirmation/airrobeConfirmationDataScript"/>
                 </div>
             </isif>
             <div class="${pdict.returningCustomer ? 'col-sm-6 offset-sm-3' : 'col-sm-6 offset-sm-3 offset-md-0 pull-md-6' }">

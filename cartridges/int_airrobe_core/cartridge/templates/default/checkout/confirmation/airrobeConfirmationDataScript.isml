@@ -4,8 +4,8 @@ if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
   window.AirRobeSalesforceData = {
     ...window.AirRobeSalesforceData,
     confirmation: {
-      "app-id": dw.system.Site.getCurrent().getCustomPreferenceValue('airRobeAppId'),
-      email: "${pdict.confirmationProps.email}"
+      "app-id": "${dw.system.Site.getCurrent().getCustomPreferenceValue('airRobeAppId')}",
+      email: "${pdict.confirmationProps.email}",
       "order-id": "${pdict.confirmationProps.orderId}"
     }
   }
@@ -18,4 +18,3 @@ if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
     widget.setAttribute('order-id', window.AirRobeSalesforceData.confirmation['order-id']);
   });
 </script>
-<airrobe-confirmation app-id="${window.AirRobeSalesforceData.confirmation['app-id']}" email="${window.AirRobeSalesforceData.confirmation.email}" order-id="${window.AirRobeSalesforceData.confirmation['order-id']}"></airrobe-confirmation>
