@@ -2,16 +2,16 @@
 
 ## Setting Custom App Preferences
 
-1. In the CommerceCloud dashboard navigate to `Merchant Tools > Site Preferences > Custom Preferences`. There will be a list of custom preference groups (the list will only contain one item, "Storefront Configs", unless you've added other preference groups previously).
+1. In the CommerceCloud Business Manager dashboard navigate to `Merchant Tools > Site Preferences > Custom Preferences`. There will be a list of custom preference groups (the list will only contain one item, "Storefront Configs", unless you've added other preference groups previously).
 2. Click the "New" button.
-3. Under "New Attribute Group", fill out the ID field with "AirRobe Configs" and the Name field with "AirRobe Configurations" (these names don't seem to be important, so you could choose another).
+3. Under "New Attribute Group", fill out the ID field with "AirRobe Configs" and the Name field with "AirRobe Configurations".
 4. Three tabs, "General", "Attribute Definitions", and "Attribute Grouping", should be visible at the top of the page. Click "Attribute Definitions".
 5. Click "New" (at this writing, it's at the bottom of the table with the existing attributes).
-6. Fill out the ID field with "airRobeScriptSrc" and set the Value Type to "String" (this is the default). 
+6. Fill out the ID field with "airRobeScriptSrc" and set the Value Type to "String" (this is the default). This name is used programmatically in the AirRobe cartridge so make sure it is spelled and cased correctly.
 7. Click "Apply". More fields will appear.
-8. Set the "Default Value" field to the URL of the AirRobe script source for staging. (You can set values individually for each of your sites, so you can override this default for production.)
+8. Set the "Default Value" field to the URL of the AirRobe script source. (You can set values individually for each of your sites, so it is possible to set different values for staging and production.)
 9. Click "Apply".
-10. Repeat steps 4-10, setting an attribute called "airRobeAppId" to the app ID for the Salesforce shop in the Connector.
+10. Repeat steps 4-10, setting an attribute called "airRobeAppId" to the app ID for the Salesforce shop in the Connector. Again, this name is used by the AirRobe cartridge, so exact spelling and casing are important.
 11. Go back to the "Attribute Grouping" tab.
 12. Find the "AirRobe Configs" grouping you created in step 3 in the table and click "Edit" in that row.
 13. Under the heading "Assign Attribute Definition", you will see a required "ID" field. To the right of this field, there is a button with three dots. Click this button.
