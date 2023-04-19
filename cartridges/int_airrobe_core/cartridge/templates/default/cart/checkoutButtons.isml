@@ -1,10 +1,4 @@
 <isinclude template="cart/airrobeMultiOptInDataScript"/>
-<script>
-    document.addEventListener('load', function() {
-        var widget = document.querySelector('airrobe-multi-opt-in')
-        widget.setAttribute('items', window.AirRobeSalesforceData.multi.items)
-    })
-</script>
 <div class="mb-sm-3">
     <a href="${URLUtils.https('Checkout-Begin')}"
         class="btn btn-primary btn-block checkout-btn ${pdict.valid.error ? 'disabled' : ''}" role="button">
