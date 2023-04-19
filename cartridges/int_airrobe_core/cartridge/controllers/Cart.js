@@ -5,9 +5,6 @@ const server = require('server')
 const Cart = module.superModule
 server.extend(Cart)
 
-var LogUtils = require('*/cartridge/scripts/util/airrobeLogUtils')
-var Logger = LogUtils.getLogger('airrobeSingleOptIn')
-
 /**
  * Retrieves props required for the AirRobe Multi Opt-in widget
  * Appended to MiniCartShow and Cart-Show controller on which the
