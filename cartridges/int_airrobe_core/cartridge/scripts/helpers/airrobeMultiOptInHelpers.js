@@ -11,15 +11,6 @@ function getAirrobeMultiOptInProps() {
 
   if (currentBasket == null) return []
 
-  // const categories = collections.map(currentBasket.getAllProductLineItems(), function (lineItem) {
-  //   let productId = lineItem.getProduct().getID()
-  //   let category = getCategory(null, productId, [])
-
-  //   return { category }
-  // })
-
-  // TODO: How to put the categories in the correct product object?
-
   const lineItems = new ProductLineItemsModel(currentBasket.productLineItems, 'basket')
 
   const categories = lineItems.items.map((product) => {
