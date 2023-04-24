@@ -1,6 +1,3 @@
-var CatalogMgr = require('dw/catalog/CatalogMgr');
-var ProductMgr = require('dw/catalog/ProductMgr');
-
 /**
  * Get category for product
  * @param {string} cgid - category ID from navigation and search
@@ -9,24 +6,26 @@ var ProductMgr = require('dw/catalog/ProductMgr');
  * @returns {string} a category string
  */
 function getCategory(cgid, pid, categoryParts) {
-  var product = ProductMgr.getProduct(pid);
-  var category;
+  const CatalogMgr = require('dw/catalog/CatalogMgr')
+  const ProductMgr = require('dw/catalog/ProductMgr')
+  const product = ProductMgr.getProduct(pid)
 
+  let category
   if (product) {
-    category = product.variant ? product.masterProduct.primaryCategory : product.primaryCategory;
+    category = product.variant ? product.masterProduct.primaryCategory : product.primaryCategory
   } else if (cgid) {
-    category = CatalogMgr.getCategory(cgid);
+    category = CatalogMgr.getCategory(cgid)
   }
 
   if (category) {
-    categoryParts.unshift(category.displayName);
+    categoryParts.unshift(category.displayName)
 
     if (category.parent && category.parent.ID !== 'root') {
-      return getCategory(category.parent.ID, null, categoryParts);
+      return getCategory(category.parent.ID, null, categoryParts)
     }
   }
 
-  return categoryParts.join('/');
+  return categoryParts.join('/')
 }
 
-module.exports = getCategory;
+module.exports = getCategory

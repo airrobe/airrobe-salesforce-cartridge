@@ -1,28 +1,27 @@
-'use strict';
+'use strict'
 
-var proxyquire = require('proxyquire').noCallThru().noPreserveCache();
-var { expect } = require('chai');
-var sinon = require('sinon');
+const proxyquire = require('proxyquire').noCallThru().noPreserveCache()
+const { expect } = require('chai')
+const sinon = require('sinon')
 
-var stubGetCategory = sinon.stub();
-var stubBasketMgrCurrentBasket = sinon.stub();
+const stubGetCategory = sinon.stub()
+const stubBasketMgrCurrentBasket = sinon.stub()
 
 describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
-  var airrobeOptInHelpers = proxyquire(
+  const airrobeOptInHelpers = proxyquire(
     '../../../../../cartridges/int_airrobe_core/cartridge/scripts/helpers/airrobeMultiOptInHelpers',
     {
       'dw/order/BasketMgr': {
-        getCurrentBasket: stubBasketMgrCurrentBasket
+        getCurrentBasket: stubBasketMgrCurrentBasket,
       },
       '*/cartridge/scripts/util/getCategory': stubGetCategory,
       '*/cartridge/scripts/util/collections': {
-        map: (items, callback) => items.map(callback)
-      }
+        map: (items, callback) => items.map(callback),
+      },
     }
-  );
+  )
 
-  let currentBasket = {};
-
+  let currentBasket = {}
   beforeEach(function () {
     currentBasket = {
       getAllProductLineItems: () => {
@@ -31,55 +30,52 @@ describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
             getProduct: () => {
               return {
                 getID: () => {
-                  return 'test-id-1';
-                }
-              };
-            }
+                  return 'test-id-1'
+                },
+              }
+            },
           },
           {
             getProduct: () => {
               return {
                 getID: () => {
-                  return 'test-id-2';
-                }
-              };
-            }
-          }
-        ];
-      }
-    };
-  });
+                  return 'test-id-2'
+                },
+              }
+            },
+          },
+        ]
+      },
+    }
+  })
 
   describe('getAirrobeMultiOptInProps() function', () => {
     describe('if there is a basket with items in it', () => {
       it('should return the airrobe widget props', () => {
-        var result;
-        var airrobeMultiProps;
+        stubBasketMgrCurrentBasket.returns(currentBasket)
+        stubGetCategory.onCall(0).returns('test/category/1')
+        stubGetCategory.onCall(1).returns('test/category/2')
 
-        stubBasketMgrCurrentBasket.returns(currentBasket);
-        stubGetCategory.onCall(0).returns('test/category/1');
-        stubGetCategory.onCall(1).returns('test/category/2');
+        const result = airrobeOptInHelpers.getAirrobeMultiOptInProps()
 
-        result = airrobeOptInHelpers.getAirrobeMultiOptInProps();
+        const airrobeMultiProps = {
+          categories: [{ category: 'test/category/1' }, { category: 'test/category/2' }],
+        }
 
-        airrobeMultiProps = {
-          categories: [{ category: 'test/category/1' }, { category: 'test/category/2' }]
-        };
-
-        expect(result.categories).to.have.deep.members(airrobeMultiProps.categories);
-      });
-    });
+        expect(result.categories).to.have.deep.members(airrobeMultiProps.categories)
+      })
+    })
 
     describe('if there is an empty basket', () => {
       it('should return an empty object', () => {
-        var result;
+        stubBasketMgrCurrentBasket.returns(null)
 
-        stubBasketMgrCurrentBasket.returns(null);
+        const result = airrobeOptInHelpers.getAirrobeMultiOptInProps()
 
-        result = airrobeOptInHelpers.getAirrobeMultiOptInProps();
+        const airrobeMultiProps = {}
 
-        expect(result).to.be.empty();
-      });
-    });
-  });
-});
+        expect(result).to.be.empty
+      })
+    })
+  })
+})

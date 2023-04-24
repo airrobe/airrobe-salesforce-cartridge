@@ -1,30 +1,29 @@
-'use strict';
+'use strict'
 
-var server = require('server');
-var helpers = require('*/cartridge/scripts/helpers/airrobeConfirmationHelpers');
+const server = require('server')
 
-var Order = module.superModule;
-server.extend(Order);
+const Order = module.superModule
+server.extend(Order)
 
 /**
  * Retrieves props required for the AirRobe Confirmation widget
  * Appended to Order-Confirm controller on which the Confirmation widget is shown
  */
-function getAirRobeConfirmationProps(req, res, next) {
-  var viewData = res.getViewData();
+const getAirRobeConfirmationProps = function (req, res, next) {
+  const viewData = res.getViewData()
 
-  var confirmationProps =
-    helpers.getAirrobeConfirmationProps(
+  const confirmationProps =
+    require('*/cartridge/scripts/helpers/airrobeConfirmationHelpers').getAirrobeConfirmationProps(
       req.form.orderID,
       req.form.orderToken
-    );
+    )
 
-  viewData.confirmationProps = confirmationProps;
+  viewData.confirmationProps = confirmationProps
 
-  res.setViewData(viewData);
-  next();
+  res.setViewData(viewData)
+  next()
 }
 
-server.append('Confirm', getAirRobeConfirmationProps);
+server.append('Confirm', getAirRobeConfirmationProps)
 
-module.exports = server.exports();
+module.exports = server.exports()

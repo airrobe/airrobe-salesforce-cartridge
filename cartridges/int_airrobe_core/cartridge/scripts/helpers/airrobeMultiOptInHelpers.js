@@ -1,30 +1,27 @@
-var getCategory = require('*/cartridge/scripts/util/getCategory');
-var ProductLineItemsModel = require('*/cartridge/models/productLineItems');
-var BasketMgr = require('dw/order/BasketMgr');
-
-
 /**
  * Get the props for the airrobe Multi Opt-in checkout cart widget
  * @return {array} an array of categories for each line item
  */
 function getAirrobeMultiOptInProps() {
-  var currentBasket = BasketMgr.getCurrentBasket();
-  var lineItems;
-  var categories;
+  const collections = require('*/cartridge/scripts/util/collections')
+  const getCategory = require('*/cartridge/scripts/util/getCategory')
+  const ProductLineItemsModel = require('*/cartridge/models/productLineItems')
+  const BasketMgr = require('dw/order/BasketMgr')
+  const currentBasket = BasketMgr.getCurrentBasket()
 
-  if (currentBasket == null) return [];
+  if (currentBasket == null) return []
 
-  lineItems = new ProductLineItemsModel(currentBasket.productLineItems, 'basket');
+  const lineItems = new ProductLineItemsModel(currentBasket.productLineItems, 'basket')
 
-  categories = lineItems.items.map(function (product) {
-    var category = getCategory(null, product.id, []);
+  const categories = lineItems.items.map((product) => {
+    const category = getCategory(null, product.id, [])
 
-    return { category: category };
-  });
+    return { category }
+  })
 
-  return categories || [];
+  return categories || []
 }
 
 module.exports = {
-  getAirrobeMultiOptInProps: getAirrobeMultiOptInProps
-};
+  getAirrobeMultiOptInProps: getAirrobeMultiOptInProps,
+}

@@ -1,33 +1,32 @@
-'use strict';
+'use strict'
 
-var proxyquire = require('proxyquire').noCallThru().noPreserveCache();
-var { expect } = require('chai');
-var sinon = require('sinon');
+const proxyquire = require('proxyquire').noCallThru().noPreserveCache()
+const { expect } = require('chai')
+const sinon = require('sinon')
 
-var stubGetProduct = sinon.stub();
-var stubGetCategory = sinon.stub();
-var stubProductFactoryGet = sinon.stub();
-var stubGetLogger = sinon.stub();
+const stubGetProduct = sinon.stub()
+const stubGetCategory = sinon.stub()
+const stubProductFactoryGet = sinon.stub()
+const stubGetLogger = sinon.stub()
 
 describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
-  var airrobeOptInHelpers = proxyquire(
+  const airrobeOptInHelpers = proxyquire(
     '../../../../../cartridges/int_airrobe_core/cartridge/scripts/helpers/airrobeSingleOptInHelpers',
     {
       '*/cartridge/scripts/factories/product': {
-        get: stubProductFactoryGet
+        get: stubProductFactoryGet,
       },
       'dw/catalog/ProductMgr': {
-        getProduct: stubGetProduct
+        getProduct: stubGetProduct,
       },
       '*/cartridge/scripts/util/airrobeLogUtils': {
-        getLogger: stubGetLogger
+        getLogger: stubGetLogger,
       },
-      '*/cartridge/scripts/util/getCategory': stubGetCategory
+      '*/cartridge/scripts/util/getCategory': stubGetCategory,
     }
-  );
+  )
 
-  var productMock = {};
-
+  const productMock = {}
   beforeEach(function () {
     productMock.constiationModel = {
       master: false,
@@ -35,72 +34,63 @@ describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
       productVariantAttributes: [
         {
           ID: 'color',
-          displayName: 'Color'
-        }
-      ]
-    };
-  });
+          displayName: 'Color',
+        },
+      ],
+    }
+  })
 
   const errorLoggerMock = {
-    error: () => {}
-  };
+    error: () => {},
+  }
 
   describe.only('getAirrobeSingleOptInProps() function', function () {
     beforeEach(function () {
-      stubProductFactoryGet.reset();
-      stubGetProduct.reset();
-      stubGetLogger.reset();
-    });
+      stubProductFactoryGet.reset()
+      stubGetProduct.reset()
+      stubGetLogger.reset()
+    })
 
     it('should return no airrobe widget props', function () {
-      var params = {};
-      var prodMock = {};
-      var result;
+      const params = {}
+      const prodMock = {}
 
-      stubProductFactoryGet.returns(prodMock);
-      stubGetLogger.returns(errorLoggerMock);
+      stubProductFactoryGet.returns(prodMock)
+      stubGetLogger.returns(errorLoggerMock)
 
-      result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params);
-
-      expect(result).to.be.empty();
-    });
+      const result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
+      expect(result).to.be.empty
+    })
 
     it('should return the airrobe widget props', function () {
-      var prodMock = {
+      const prodMock = {
         productType: 'variant',
         id: '12345',
         brand: 'test brand',
         price: {
           sales: {
             value: 123,
-            currency: 'AUD'
-          }
-        }
-      };
+            currency: 'AUD',
+          },
+        },
+      }
+      const testCategory = 'test/category/1'
 
-      var testCategory = 'test/category/1';
-      var params;
-      var result;
-      var priceCents;
-      var airrobePdpProps;
+      stubProductFactoryGet.returns(prodMock)
+      stubGetCategory.onCall(0).returns(testCategory)
 
-      stubProductFactoryGet.returns(prodMock);
-      stubGetCategory.onCall(0).returns(testCategory);
+      const params = { pid: '12345' }
+      const result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
 
-      params = { pid: '12345' };
-      result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params);
-
-      priceCents = prodMock.price.sales.value * 100;
-
-      airrobePdpProps = {
+      const priceCents = prodMock.price.sales.value * 100
+      const airrobePdpProps = {
         rrpCents: priceCents,
-        priceCents: priceCents,
+        priceCents,
         currency: prodMock.price.sales.currency,
         category: testCategory,
-        brand: prodMock.brand
-      };
-
-      expect(result).to.deep.include(airrobePdpProps);
-    });
-  });
-});
+        brand: prodMock.brand,
+      }
+      expect(result).to.deep.include(airrobePdpProps)
+    })
+  })
+})

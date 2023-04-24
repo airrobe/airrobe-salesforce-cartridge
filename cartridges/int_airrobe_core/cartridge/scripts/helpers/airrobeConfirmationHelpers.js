@@ -1,5 +1,3 @@
-var OrderMgr = require('dw/order/OrderMgr');
-
 /**
  * Get the props for the AirRobe confirmation widget
  * @param {string} orderId id for the current order
@@ -7,15 +5,16 @@ var OrderMgr = require('dw/order/OrderMgr');
  * @return {object} an array of categories for each line item
  */
 function getAirrobeConfirmationProps(orderId, orderToken) {
-  var order = OrderMgr.getOrder(orderId, orderToken);
-  var email = order.getCustomerEmail();
+  const OrderMgr = require('dw/order/OrderMgr')
+  const order = OrderMgr.getOrder(orderId, orderToken)
+  const email = order.getCustomerEmail()
 
   return {
-    orderId: orderId,
-    email: email
-  };
+    orderId,
+    email,
+  }
 }
 
 module.exports = {
-  getAirrobeConfirmationProps: getAirrobeConfirmationProps
-};
+  getAirrobeConfirmationProps: getAirrobeConfirmationProps,
+}

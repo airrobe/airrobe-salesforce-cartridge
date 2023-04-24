@@ -1,7 +1,6 @@
-var path = require('path');
-var ExtractTextPlugin = require('sgmf-scripts')['extract-text-webpack-plugin'];
-var sgmfScripts = require('sgmf-scripts');
-var autoprefixer = require('autoprefixer')();
+var path = require('path')
+var ExtractTextPlugin = require('sgmf-scripts')['extract-text-webpack-plugin']
+var sgmfScripts = require('sgmf-scripts')
 
 module.exports = [
   {
@@ -10,8 +9,8 @@ module.exports = [
     entry: sgmfScripts.createJsPath(),
     output: {
       path: path.resolve('./cartridges/int_airrobe_core/cartridge/static'),
-      filename: '[name].js'
-    }
+      filename: '[name].js',
+    },
   },
   {
     mode: 'none',
@@ -19,7 +18,7 @@ module.exports = [
     entry: sgmfScripts.createScssPath(),
     output: {
       path: path.resolve('./cartridges/int_airrobe_core/cartridge/static'),
-      filename: '[name].css'
+      filename: '[name].css',
     },
     module: {
       rules: [
@@ -30,23 +29,23 @@ module.exports = [
               {
                 loader: 'css-loader',
                 options: {
-                  url: false
-                }
+                  url: false,
+                },
               },
               {
                 loader: 'postcss-loader',
                 options: {
-                  plugins: [autoprefixer]
-                }
+                  plugins: [require('autoprefixer')()],
+                },
               },
               {
-                loader: 'sass-loader'
-              }
-            ]
-          })
-        }
-      ]
+                loader: 'sass-loader',
+              },
+            ],
+          }),
+        },
+      ],
     },
-    plugins: [new ExtractTextPlugin({ filename: '[name].css' })]
-  }
-];
+    plugins: [new ExtractTextPlugin({ filename: '[name].css' })],
+  },
+]
