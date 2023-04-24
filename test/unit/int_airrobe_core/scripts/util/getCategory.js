@@ -1,61 +1,67 @@
-'use strict'
+'use strict';
 
-const proxyquire = require('proxyquire').noCallThru().noPreserveCache()
-const { expect } = require('chai')
-const sinon = require('sinon')
+var proxyquire = require('proxyquire').noCallThru().noPreserveCache();
+var { expect } = require('chai');
+var sinon = require('sinon');
 
-const stubGetProduct = sinon.stub()
-const stubCategoryMock = sinon.stub()
+var stubGetProduct = sinon.stub();
+var stubCategoryMock = sinon.stub();
 
 describe('Utils - Category', function () {
-  const getCategory = proxyquire(
+  var getCategory = proxyquire(
     '../../../../../cartridges/int_airrobe_core/cartridge/scripts/util/getCategory',
     {
       'dw/catalog/CatalogMgr': stubCategoryMock,
       'dw/catalog/ProductMgr': {
-        getProduct: stubGetProduct,
-      },
+        getProduct: stubGetProduct
+      }
     }
-  )
+  );
 
   describe('getCategory() function', () => {
+    var categoryMock;
+    var apiProductMock;
+
     beforeEach(function () {
-      stubGetProduct.reset()
-      stubCategoryMock.reset()
-    })
+      stubGetProduct.reset();
+      stubCategoryMock.reset();
+    });
 
     it('should return no category', function () {
-      const noApiProductMock = {}
+      var noApiProductMock = {};
+      var result;
 
-      stubGetProduct.returns(noApiProductMock)
+      stubGetProduct.returns(noApiProductMock);
 
-      const result = getCategory(null, null, [])
-      expect(result.length).to.be.equal(0)
-    })
+      result = getCategory(null, null, []);
+      expect(result.length).to.be.equal(0);
+    });
 
-    const categoryMock = {
+    categoryMock = {
       displayName: 'test category',
       ID: 'gid',
       parent: {
-        ID: 'root',
-      },
-    }
+        ID: 'root'
+      }
+    };
 
-    const apiProductMock = {
+    apiProductMock = {
       variant: true,
       masterProduct: {
-        primaryCategory: categoryMock,
+        primaryCategory: categoryMock
       },
-      primaryCategoryMock: categoryMock,
-    }
+      primaryCategoryMock: categoryMock
+    };
 
     it('should return a category', function () {
-      stubGetProduct.returns(apiProductMock)
-      stubCategoryMock.returns(categoryMock)
+      var result;
 
-      const result = getCategory(null, 'pid', [])
+      stubGetProduct.returns(apiProductMock);
+      stubCategoryMock.returns(categoryMock);
 
-      expect(result).to.be.equal('test category')
-    })
-  })
-})
+      result = getCategory(null, 'pid', []);
+
+      expect(result).to.be.equal('test category');
+    });
+  });
+});
