@@ -1,6 +1,4 @@
-<iscomment> Start of AirRobe </iscomment>
-<isinclude template="cart/cartCheckoutButtonsExtension"/>
-<iscomment> End of AirRobe </iscomment>
+<isinclude template="cart/airrobeMultiOptInDataScript"/>
 <div class="mb-sm-3">
     <a href="${URLUtils.https('Checkout-Begin')}"
         class="btn btn-primary btn-block checkout-btn ${pdict.valid.error ? 'disabled' : ''}" role="button">

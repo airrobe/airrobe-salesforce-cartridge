@@ -10,7 +10,7 @@
     "uploadCartridge": "sgmf-scripts --uploadCartridge int_airrobe_core",
     "compile:js": "sgmf-scripts --compile js",
     "compile:scss": "sgmf-scripts --compile css",
-    "test": "sgmf-scripts --test test/unit/**/*.js && npx mocha test/unit/**/getCategory.js --reporter spec"
+    "test": "sgmf-scripts --test test/unit/**/*.js && npx mocha test/unit/**/getCategory.js --reporter spec && npx mocha test/unit/**/airrobeMultiOptInHelpers.js --reporter spec"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -1,10 +1,2 @@
-<iscomment> This is used by single opt in widget to get the props it needs to render</iscomment>
-<script>
-  window.AirRobeSingleSFData = {
-    currencyCode: "${product.airrobeSingleOptInProps.currency}",
-    priceCents: "${product.airrobeSingleOptInProps.priceCents}".replace('.0',''),
-    rrpCents: "${product.airrobeSingleOptInProps.priceCents}".replace('.0',''),
-    category: "${product.airrobeSingleOptInProps.category}",
-    brand: "${product.airrobeSingleOptInProps.brand}"
-  };
-</script>
+<isinclude template="product/components/airrobeSingleOptInDataScript"/>
+

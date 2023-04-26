@@ -1,0 +1,25 @@
+<iscomment> This is used by the AirRobe Single Opt-in widget to get the props it needs to render</iscomment>
+<script>
+  if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
+  window.AirRobeSalesforceData = {
+    ...window.AirRobeSalesforceData,
+    single: {
+      currency: "${product.airrobeSingleOptInProps.currency}",
+      "price-cents": "${product.airrobeSingleOptInProps.priceCents}".replace('.0',''),
+      "rrp-cents": "${product.airrobeSingleOptInProps.priceCents}".replace('.0',''),
+      category: "${product.airrobeSingleOptInProps.category}",
+      brand: "${product.airrobeSingleOptInProps.brand}"
+    }
+  };
+</script>
+<script>
+  document.addEventListener('load', function() {
+    var widget = document.querySelector('airrobe-opt-in');
+    widget.setAttribute('currency', window.AirRobeSalesforceData.single.currency);
+    widget.setAttribute('price-cents', window.AirRobeSalesforceData.single['price-cents']);
+    widget.setAttribute('rrp-cents', window.AirRobeSalesforceData.single['rrp-cents']);
+    widget.setAttribute('category', window.AirRobeSalesforceData.single.category);
+    widget.setAttribute('brand', window.AirRobeSalesforceData.single.brand);
+  });
+</script>
+

@@ -1,0 +1,18 @@
+<iscomment> This is used by multi opt in widget to get the props it needs to render</iscomment>
+<script>
+  const categories = "${JSON.stringify(pdict.resources.categories)}".replace(/&quot;/g, '"')
+
+  if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {}
+  window.AirRobeSalesforceData = {
+    ...window.AirRobeSalesforceData,
+    multi: {
+      items: categories
+    }
+  }
+</script>
+<script>
+    document.addEventListener('load', function() {
+        var widget = document.querySelector('airrobe-multi-opt-in')
+        widget.setAttribute('items', window.AirRobeSalesforceData.multi.items)
+    })
+</script>

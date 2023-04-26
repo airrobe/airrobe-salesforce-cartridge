@@ -5,19 +5,21 @@
 function getAirrobeMultiOptInProps() {
   const collections = require('*/cartridge/scripts/util/collections')
   const getCategory = require('*/cartridge/scripts/util/getCategory')
+  const ProductLineItemsModel = require('*/cartridge/models/productLineItems')
   const BasketMgr = require('dw/order/BasketMgr')
   const currentBasket = BasketMgr.getCurrentBasket()
 
-  const categories = collections.map(currentBasket.getAllProductLineItems(), function (lineItem) {
-    let productId = lineItem.getProduct().getID()
-    let category = getCategory(null, productId, [])
+  if (currentBasket == null) return []
+
+  const lineItems = new ProductLineItemsModel(currentBasket.productLineItems, 'basket')
+
+  const categories = lineItems.items.map((product) => {
+    const category = getCategory(null, product.id, [])
 
     return { category }
   })
 
-  return {
-    categories,
-  }
+  return categories || []
 }
 
 module.exports = {
