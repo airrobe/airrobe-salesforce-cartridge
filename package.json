@@ -1,7 +1,13 @@
 {
-  "name": "int_airrobe_core",
-  "version": "0.0.1",
-  "description": "New overlay cartridge",
+  "name": "AirRobe",
+  "version": "23.0.0",
+  "description": "AirRobe's official cartridge for SFRA",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airrobe/airrobe-salesforce-cartridge.git"
+  },
+  "homepage": "https://github.com/airrobe/airrobe-salesforce-cartridge",
+  "packageName": "int_airrobe_sfra",
   "main": "index.js",
   "scripts": {
     "lint": "sgmf-scripts --lint js && sgmf-scripts --lint css",
