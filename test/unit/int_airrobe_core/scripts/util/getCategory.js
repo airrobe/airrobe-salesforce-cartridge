@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 
-const proxyquire = require('proxyquire').noCallThru().noPreserveCache()
-const { expect } = require('chai')
-const sinon = require('sinon')
+const proxyquire = require('proxyquire').noCallThru().noPreserveCache();
+const { expect } = require('chai');
+const sinon = require('sinon');
 
-const stubGetProduct = sinon.stub()
-const stubCategoryMock = sinon.stub()
+const stubGetProduct = sinon.stub();
+const stubCategoryMock = sinon.stub();
 
 describe('Utils - Category', function () {
   const getCategory = proxyquire(
@@ -13,49 +13,49 @@ describe('Utils - Category', function () {
     {
       'dw/catalog/CatalogMgr': stubCategoryMock,
       'dw/catalog/ProductMgr': {
-        getProduct: stubGetProduct,
-      },
+        getProduct: stubGetProduct
+      }
     }
-  )
+  );
 
   describe('getCategory() function', () => {
     beforeEach(function () {
-      stubGetProduct.reset()
-      stubCategoryMock.reset()
-    })
+      stubGetProduct.reset();
+      stubCategoryMock.reset();
+    });
 
     it('should return no category', function () {
-      const noApiProductMock = {}
+      const noApiProductMock = {};
 
-      stubGetProduct.returns(noApiProductMock)
+      stubGetProduct.returns(noApiProductMock);
 
-      const result = getCategory(null, null, [])
-      expect(result.length).to.be.equal(0)
-    })
+      const result = getCategory(null, null, []);
+      expect(result.length).to.be.equal(0);
+    });
 
     const categoryMock = {
       displayName: 'test category',
       ID: 'gid',
       parent: {
-        ID: 'root',
-      },
-    }
+        ID: 'root'
+      }
+    };
 
     const apiProductMock = {
       variant: true,
       masterProduct: {
-        primaryCategory: categoryMock,
+        primaryCategory: categoryMock
       },
-      primaryCategoryMock: categoryMock,
-    }
+      primaryCategoryMock: categoryMock
+    };
 
     it('should return a category', function () {
-      stubGetProduct.returns(apiProductMock)
-      stubCategoryMock.returns(categoryMock)
+      stubGetProduct.returns(apiProductMock);
+      stubCategoryMock.returns(categoryMock);
 
-      const result = getCategory(null, 'pid', [])
+      const result = getCategory(null, 'pid', []);
 
-      expect(result).to.be.equal('test category')
-    })
-  })
-})
+      expect(result).to.be.equal('test category');
+    });
+  });
+});
