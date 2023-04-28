@@ -58,9 +58,10 @@ describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
       stubProductFactoryGet.returns(prodMock)
       stubGetLogger.returns(errorLoggerMock)
 
-      const result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params)
-      expect(result).to.be.empty
-    })
+      result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params);
+
+      expect(result).to.be.empty;
+    });
 
     it('should return the airrobe widget props', function () {
       const prodMock = {
