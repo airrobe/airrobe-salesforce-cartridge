@@ -63,7 +63,7 @@ describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
 
       result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params);
 
-      expect(result).to.be.empty;
+      expect(result).to.be.empty; // eslint-disable-line no-unused-expressions
     });
 
     it('should return the airrobe widget props', function () {

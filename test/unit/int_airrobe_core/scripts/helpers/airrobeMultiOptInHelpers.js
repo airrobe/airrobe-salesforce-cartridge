@@ -69,7 +69,7 @@ describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
 
         result = airrobeOptInHelpers.getAirrobeMultiOptInProps();
 
-        expect(result).to.be.empty;
+        expect(result).to.be.empty; // eslint-disable-line no-unused-expressions
       });
     });
   });
