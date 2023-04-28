@@ -45,7 +45,7 @@ describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
             { id: 'foo' },
             { id: 'bar' }
           ]
-        })
+        });
         stubGetCategory.onCall(0).returns('test/category/1');
         stubGetCategory.onCall(1).returns('test/category/2');
 
