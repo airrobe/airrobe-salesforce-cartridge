@@ -1,6 +1,7 @@
 var path = require('path');
 var ExtractTextPlugin = require('sgmf-scripts')['extract-text-webpack-plugin'];
 var sgmfScripts = require('sgmf-scripts');
+var autoprefixer = require('autoprefixer')();
 
 module.exports = [
   {
@@ -35,7 +36,7 @@ module.exports = [
               {
                 loader: 'postcss-loader',
                 options: {
-                  plugins: [require('autoprefixer')()]
+                  plugins: [autoprefixer]
                 }
               },
               {

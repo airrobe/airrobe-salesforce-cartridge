@@ -1,19 +1,19 @@
-'use strict'
+'use strict';
 
-const proxyquire = require('proxyquire').noCallThru().noPreserveCache()
-const { expect } = require('chai')
-const sinon = require('sinon')
+var proxyquire = require('proxyquire').noCallThru().noPreserveCache();
+var { expect } = require('chai');
+var sinon = require('sinon');
 
 var stubGetCategory = sinon.stub();
 var stubBasketMgrCurrentBasket = sinon.stub();
 var stubProductLineItemsModel = sinon.stub();
 
 describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
-  const airrobeOptInHelpers = proxyquire(
+  var airrobeOptInHelpers = proxyquire(
     '../../../../../cartridges/int_airrobe_core/cartridge/scripts/helpers/airrobeMultiOptInHelpers',
     {
       'dw/order/BasketMgr': {
-        getCurrentBasket: stubBasketMgrCurrentBasket,
+        getCurrentBasket: stubBasketMgrCurrentBasket
       },
       '*/cartridge/scripts/util/getCategory': stubGetCategory,
       '*/cartridge/models/productLineItems': stubProductLineItemsModel
@@ -22,7 +22,6 @@ describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
 
   var currentBasket = {};
 
-  let currentBasket = {}
   beforeEach(function () {
     currentBasket = {
       productLineItems: [
@@ -35,9 +34,12 @@ describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
   describe('getAirrobeMultiOptInProps() function', () => {
     describe('if there is a basket with items in it', () => {
       it('should return the airrobe widget props', () => {
-        stubBasketMgrCurrentBasket.returns(currentBasket)
-        stubGetCategory.onCall(0).returns('test/category/1')
-        stubGetCategory.onCall(1).returns('test/category/2')
+        var airrobeMultiProps;
+        var result;
+
+        stubBasketMgrCurrentBasket.returns(currentBasket);
+        stubGetCategory.onCall(0).returns('test/category/1');
+        stubGetCategory.onCall(1).returns('test/category/2');
 
         stubBasketMgrCurrentBasket.returns(currentBasket);
         stubProductLineItemsModel.returns({
@@ -49,9 +51,7 @@ describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
         stubGetCategory.onCall(0).returns('test/category/1');
         stubGetCategory.onCall(1).returns('test/category/2');
 
-        const airrobeMultiProps = {
-          categories: [{ category: 'test/category/1' }, { category: 'test/category/2' }],
-        }
+        result = airrobeOptInHelpers.getAirrobeMultiOptInProps();
 
         airrobeMultiProps = {
           categories: [{ category: 'test/category/1' }, { category: 'test/category/2' }]
@@ -63,11 +63,11 @@ describe('Helpers - AirRobe Multi Opt-in Helpers', function () {
 
     describe('if there is an empty basket', () => {
       it('should return an empty object', () => {
-        stubBasketMgrCurrentBasket.returns(null)
+        var result;
 
-        const result = airrobeOptInHelpers.getAirrobeMultiOptInProps()
+        stubBasketMgrCurrentBasket.returns(null);
 
-        const airrobeMultiProps = {}
+        result = airrobeOptInHelpers.getAirrobeMultiOptInProps();
 
         expect(result).to.be.empty;
       });

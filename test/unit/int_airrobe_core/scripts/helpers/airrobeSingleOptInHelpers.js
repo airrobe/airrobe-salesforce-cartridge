@@ -1,16 +1,16 @@
 'use strict';
 
-const proxyquire = require('proxyquire').noCallThru().noPreserveCache();
-const { expect } = require('chai');
-const sinon = require('sinon');
+var proxyquire = require('proxyquire').noCallThru().noPreserveCache();
+var { expect } = require('chai');
+var sinon = require('sinon');
 
-const stubGetProduct = sinon.stub();
-const stubGetCategory = sinon.stub();
-const stubProductFactoryGet = sinon.stub();
-const stubGetLogger = sinon.stub();
+var stubGetProduct = sinon.stub();
+var stubGetCategory = sinon.stub();
+var stubProductFactoryGet = sinon.stub();
+var stubGetLogger = sinon.stub();
 
 describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
-  const airrobeOptInHelpers = proxyquire(
+  var airrobeOptInHelpers = proxyquire(
     '../../../../../cartridges/int_airrobe_core/cartridge/scripts/helpers/airrobeSingleOptInHelpers',
     {
       '*/cartridge/scripts/factories/product': {
@@ -26,9 +26,11 @@ describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
     }
   );
 
-  const productMock = {};
+  var productMock = {};
+  var errorLoggerMock;
+
   beforeEach(function () {
-    productMock.constiationModel = {
+    productMock.variationModel = {
       master: false,
       selectedVariant: false,
       productVariantAttributes: [
@@ -40,7 +42,7 @@ describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
     };
   });
 
-  const errorLoggerMock = {
+  errorLoggerMock = {
     error: () => {}
   };
 
@@ -52,8 +54,9 @@ describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
     });
 
     it('should return no airrobe widget props', function () {
-      const params = {};
-      const prodMock = {};
+      var params = {};
+      var prodMock = {};
+      var result;
 
       stubProductFactoryGet.returns(prodMock);
       stubGetLogger.returns(errorLoggerMock);
@@ -64,7 +67,7 @@ describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
     });
 
     it('should return the airrobe widget props', function () {
-      const prodMock = {
+      var prodMock = {
         productType: 'variant',
         id: '12345',
         brand: 'test brand',
@@ -75,22 +78,27 @@ describe('Helpers -  AirRobe Single Opt-in Helpers', function () {
           }
         }
       };
-      const testCategory = 'test/category/1';
+      var testCategory = 'test/category/1';
+      var params;
+      var result;
+      var priceCents;
+      var airrobePdpProps;
 
       stubProductFactoryGet.returns(prodMock);
       stubGetCategory.onCall(0).returns(testCategory);
 
-      const params = { pid: '12345' };
-      const result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params);
+      params = { pid: '12345' };
+      result = airrobeOptInHelpers.getAirrobeSingleOptInProps(params);
 
-      const priceCents = prodMock.price.sales.value * 100;
-      const airrobePdpProps = {
+      priceCents = prodMock.price.sales.value * 100;
+      airrobePdpProps = {
         rrpCents: priceCents,
         priceCents,
         currency: prodMock.price.sales.currency,
         category: testCategory,
         brand: prodMock.brand
       };
+
       expect(result).to.deep.include(airrobePdpProps);
     });
   });

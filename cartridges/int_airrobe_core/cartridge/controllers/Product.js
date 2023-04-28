@@ -1,33 +1,35 @@
-'use strict'
+'use strict';
 /* global empty */
 
-const server = require('server')
+var server = require('server');
+var helpers = require('*/cartridge/scripts/helpers/airrobeSingleOptInHelpers');
 
 /**
  * Extending and customising controllers
  * https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_customizing_controllers_and_routes.html
  */
-const Product = module.superModule
-server.extend(Product)
+var Product = module.superModule;
+server.extend(Product);
 
 /**
  * Retrieves props required for the AirRobe Single Opt-in widget
  * Appended to Product-Show controller on which the Single Opt-in widget is shown
  */
-const getAirRobeSingleOptInProps = function (req, res, next) {
-  const viewData = res.getViewData()
+function getAirRobeSingleOptInProps(req, res, next) {
+  var viewData = res.getViewData();
 
-  const params = req.querystring
-  const airrobeSingleOptInProps =
-    require('*/cartridge/scripts/helpers/airrobeSingleOptInHelpers').getAirrobeSingleOptInProps(
+  var params = req.querystring;
+  var airrobeSingleOptInProps =
+    helpers.getAirrobeSingleOptInProps(
       params
-    )
-  viewData.product.airrobeSingleOptInProps = airrobeSingleOptInProps
+    );
 
-  res.setViewData(viewData)
-  next()
+  viewData.product.airrobeSingleOptInProps = airrobeSingleOptInProps;
+
+  res.setViewData(viewData);
+  next();
 }
 
-server.append('Show', getAirRobeSingleOptInProps)
+server.append('Show', getAirRobeSingleOptInProps);
 
-module.exports = server.exports()
+module.exports = server.exports();
