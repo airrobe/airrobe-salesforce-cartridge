@@ -1,25 +1,19 @@
-# AirRobe Salesforce Commerce Cloud Cartridge
+# Salesforce Commerce Cloud AirRobe Cartridge
 
-## Setting Custom App Preferences
+AirRobe provides a LINK cartridge to integrate with Salesforce Commerce Cloud (SFCC). This cartridge enables a SFCC storefront to use AirRobe's Circular Wardrobe Widgets.
 
-1. In the CommerceCloud Business Manager dashboard navigate to `Merchant Tools > Site Preferences > Custom Preferences`. There will be a list of custom preference groups (the list will only contain one item, "Storefront Configs", unless you've added other preference groups previously).
-2. Click the "New" button.
-3. Under "New Attribute Group", fill out the ID field with "AirRobe Configs" and the Name field with "AirRobe Configurations".
-4. Three tabs, "General", "Attribute Definitions", and "Attribute Grouping", should be visible at the top of the page. Click "Attribute Definitions".
-5. Click "New" (at this writing, it's at the bottom of the table with the existing attributes).
-6. Fill out the ID field with "airRobeScriptSrc" and set the Value Type to "String" (this is the default). This name is used programmatically in the AirRobe cartridge so make sure it is spelled and cased correctly.
-7. Click "Apply". More fields will appear.
-8. Set the "Default Value" field to the URL of the AirRobe script source. (You can set values individually for each of your sites, so it is possible to set different values for staging and production.)
-9. Click "Apply".
-10. Repeat steps 4-10, setting an attribute called "airRobeAppId" to the app ID for the Salesforce shop in the Connector. Again, this name is used by the AirRobe cartridge, so exact spelling and casing are important.
-11. Go back to the "Attribute Grouping" tab.
-12. Find the "AirRobe Configs" grouping you created in step 3 in the table and click "Edit" in that row.
-13. Under the heading "Assign Attribute Definition", you will see a required "ID" field. To the right of this field, there is a button with three dots. Click this button.
-14. Select the "airRobeScriptSrc" and "airRobeAppId" attributes using the checkboxes in the popup window that appears and click "Select".
+## Integration
 
-### Customizing Settings Per Site
+This cartridge allows you to integrate AirRobe's Circular Wardrobe Widgets to your SFCC site. It allows a customer's purchased items to be sold on AirRobe's [marketplace](https://shop.airrobe.com) via AirRobe's Connector system.
 
-1. Navigate back to `Merchant Tools > Site Preferences > Custom Preferences`.
-2. In the table, click on the "AirRobe Configs" preference group. You'll be taken to a page with a table showing the custom attributes you've chosen ("airRobeScriptSrc" and "airRobeAppId").
-3. In each row of the table, there is a link to "Edit Across Sites". Clicking this link will take you to a page where you can set the value of that attribute for each of your sites. It will be populated by default with the default value you set in step 8, above.
-4. For each site, change the value of the variable to the desired value and click "Save".
+## Requirements
+
+You will need an AirRobe Connector account to use this cartridge. Please contact your AirRobe account contact to set that up or reach out to us on hello@airrobe.com
+
+## Installation, Usage and Configuration
+
+Installation, Usage, and Configuration are explained in the [documentation](https://github.com/airrobe/airrobe-salesforce-cartridge/tree/main/documentation).
+
+## License
+
+Apache License. See [LICENSE](https://github.com/airrobe/airrobe-salesforce-cartridge/blob/main/LICENSE).
