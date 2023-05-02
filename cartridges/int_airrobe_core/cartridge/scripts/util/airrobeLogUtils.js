@@ -3,20 +3,20 @@
  */
 
 // API Includes
-var Logger = require('dw/system/Logger')
-var Resource = require('dw/web/Resource')
+var Logger = require('dw/system/Logger');
+var Resource = require('dw/web/Resource');
 
 // Global Variables
-var defaultLogFilePrefix = Resource.msg('log.filename', 'airrobe', null)
+var defaultLogFilePrefix = Resource.msg('log.filename', 'airrobe', null);
 
-var LoggerUtils = {}
+var LoggerUtils = {};
 
 LoggerUtils.getLogger = function (category) {
   if (category) {
-    return Logger.getLogger(defaultLogFilePrefix, category)
+    return Logger.getLogger(defaultLogFilePrefix, category);
   }
 
-  return Logger.getLogger(defaultLogFilePrefix)
-}
+  return Logger.getLogger(defaultLogFilePrefix);
+};
 
-module.exports = LoggerUtils
+module.exports = LoggerUtils;
