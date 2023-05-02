@@ -9,10 +9,9 @@
       items: categories
     }
   }
-</script>
-<script>
-    document.addEventListener('load', function() {
-        var widget = document.querySelector('airrobe-multi-opt-in')
-        widget.setAttribute('items', window.AirRobeSalesforceData.multi.items)
-    })
+
+  document.addEventListener('load', function() {
+    var widget = document.querySelector('airrobe-multi-opt-in')
+    widget.setAttribute('items', window.AirRobeSalesforceData.multi.items)
+  })
 </script>

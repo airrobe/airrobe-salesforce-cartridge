@@ -11,8 +11,7 @@
       brand: "${product.airrobeSingleOptInProps.brand}"
     }
   };
-</script>
-<script>
+
   document.addEventListener('load', function() {
     var widget = document.querySelector('airrobe-opt-in');
     widget.setAttribute('currency', window.AirRobeSalesforceData.single.currency);

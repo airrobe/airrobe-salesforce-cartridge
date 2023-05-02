@@ -9,8 +9,7 @@ if (!window.AirRobeSalesforceData) window.AirRobeSalesforceData = {};
       "order-id": "${pdict.confirmationProps.orderId}"
     }
   }
-</script>
-<script>
+
   window.addEventListener('load', function() {
     var widget = document.querySelector('airrobe-confirmation');
     widget.setAttribute('app-id', window.AirRobeSalesforceData.confirmation['app-id']);
