@@ -1,0 +1,8 @@
+// Replace the following example with the appropriate values from your system
+{
+  "username": "The username you use to log into Business Manager",
+  "password": "The password you use to log into Business Manager",
+  "hostname": "The host name of the instance you want to upload the cartridge to.",
+  "code-version": "This is the Code Version you want to deploy to in Administration > Site Development > Code Deployment.",
+  "cartridgesPath": "This may not be required but if it is, use the paths “int_airrobe_core:int_airrobe_sfra."
+}
