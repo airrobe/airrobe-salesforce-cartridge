@@ -1,5 +1,5 @@
 var path = require('path');
-var ExtractTextPlugin = require('sgmf-scripts')['extract-text-webpack-plugin'];
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var sgmfScripts = require('sgmf-scripts');
 var autoprefixer = require('autoprefixer')();
 
@@ -25,28 +25,29 @@ module.exports = [
       rules: [
         {
           test: /\.scss$/,
-          use: ExtractTextPlugin.extract({
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  url: false
-                }
-              },
-              {
-                loader: 'postcss-loader',
-                options: {
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                url: false
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                postcssOptions: {
                   plugins: [autoprefixer]
                 }
-              },
-              {
-                loader: 'sass-loader'
               }
-            ]
-          })
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
         }
       ]
     },
-    plugins: [new ExtractTextPlugin({ filename: '[name].css' })]
+    plugins: [new MiniCssExtractPlugin({ filename: '[name].css' })]
   }
 ];
